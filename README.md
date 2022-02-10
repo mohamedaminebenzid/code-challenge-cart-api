@@ -1,40 +1,44 @@
-# Pixartprinting Challenge: Cart API
+# Pixartprinting Code challenge: Cart API
 
-_*code-challenge-cart-api*_
+## Intro
 
 Cart API Code challenge: part of the interview process at Pixartprinting
 
 _Dear candidate,_
 
-_*We hope you are excited to take this challenge, as much as we will, when reviewing your code*_ :smile:
+_we are confident you are excited to take this challenge. As much as we are, when we will review your code._
 
 ## Forewords
 
-_*The aim is NOT to see a full working project, production ready, rather to have a glance of your programming skills, approach and ability to solve a problem,*_
-
-Take your time to solve this challenge: time is important but not the most...
+_The aim is not to develop a full working project, production ready, rather to have a glance of your skills: how you approach and solve a problem._
 
 You don't need to rush into delivering us a solution, but it can't also take forever.
 
-You don't need to overdo or develop any possible aspect of the application, keep **focus on the most relevant aspects** and those requested by specification.
+Take the right time to evaluate this challenge: time is important but not the most...
+
+You don't need to overdo or develop any possible aspect of the application, **focus on the most relevant aspects** and those requested by specification.
 
 We will support you in accessing this repo and cloning it
 
-**IMPORTANT:**
-As soon as you clone this repo:
+**IMPORTANT**, as soon as you clone this repo:
 
-- add a CONTRIBUTING.md file push it to your own GitHub repository account, 
-- then please share your own repo with your contact person's GithHub account
+- add your CONTRIBUTING.md file
+- push it back to your working repository on your GitHub account
+- right after this, before starting any development, please share back your working repo with us
+- you will need CONTRIBUTING.md to input additional information about your development, all the info you consider relevant to share with us before we will discuss togheter your challenge solution
 
 ## Cart Challenge description
 
-We want you to create a REST API to implement the following business requirements collected from our e-commerce Cart use case session.
-We are a "web to print" company:
+We are a "web to print" company and we ask you to create a REST API to implement the following business requirements, collected from our e-commerce Cart use case session:
 
-customers connect to our e-commerce, then choose a product, select number of copies to print (quantity) along with a desired delivery date.
-Add to Cart. Checkout the Cart.
+- customers connect to our e-commerce
+- choose a product and configure it
+- select number of copies to print (quantity) along with a desired delivery date
+- select and send us their artwork to print
+- add the product to Cart
+- checkout the Cart.
 
-To have an idea on how we add to cart products, selecting: quantity/date, please have look at a live example: [Product Page](https://www.pixartprinting.co.uk/digital-litho-printing/printing-business-cards/)
+To have an idea on how we add products to cart, please have look at a live example: [Product Page](https://www.pixartprinting.co.uk/digital-litho-printing/printing-business-cards/)
 
 ### Cart creation
 
@@ -100,7 +104,7 @@ and will calculate and set the final price for the cart
 - Document: Providing a summary of the activity
 - Feedback: pls leave us some comments on what you think about the test
 
-**_Have fun coding this challenge!_**
+_Have fun coding this challenge!_
 
 Please let us know when you are done and have committed everything on your GitHub repo
 
