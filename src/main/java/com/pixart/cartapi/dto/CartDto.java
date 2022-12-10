@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.hateoas.EntityModel;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.pixart.cartapi.utils.CartStatus;
 
@@ -28,5 +30,5 @@ public class CartDto {
 	private LocalDate checkoutDate;
 
 	@JsonManagedReference
-	private List<CartItemDto> cartItems;
+	private List<EntityModel<CartItemDto>> cartItems;
 }

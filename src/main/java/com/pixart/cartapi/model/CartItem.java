@@ -1,5 +1,6 @@
 package com.pixart.cartapi.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
@@ -34,7 +35,7 @@ public class CartItem {
 	@JoinColumn(name = "cart_id", nullable = false)
 	private Cart cart;
 
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "product_id", nullable = false)
 	private Product product;
 
@@ -44,5 +45,9 @@ public class CartItem {
 
 	@Enumerated(EnumType.STRING)
 	private ArtWorkFileType fileType;
+
+	public BigDecimal getBasePrice() {
+		return product.getPrice();
+	}
 
 }

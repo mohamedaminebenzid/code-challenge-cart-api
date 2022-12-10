@@ -55,8 +55,6 @@ public class CustomerController {
 
 		return CollectionModel.of(customers,
 				linkTo(methodOn(CustomerController.class).getAllCustomers()).withSelfRel());
-		// return new ResponseEntity<>(customerService.getAllCustomers(),
-		// HttpStatus.OK);
 
 	}
 

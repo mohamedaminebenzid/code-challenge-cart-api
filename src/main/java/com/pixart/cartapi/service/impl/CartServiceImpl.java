@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.pixart.cartapi.exceptionhandler.ElementNotFoundException;
 import com.pixart.cartapi.model.Cart;
 import com.pixart.cartapi.repository.CartRepository;
+import com.pixart.cartapi.service.CartPriceCalculationService;
 import com.pixart.cartapi.service.CartService;
 
 @Service
@@ -15,6 +16,9 @@ public class CartServiceImpl implements CartService {
 
 	@Autowired
 	private CartRepository cartRepository;
+
+	@Autowired
+	private CartPriceCalculationService cartPriceCalculationService;
 
 	@Override
 	public Cart getCartById(Long id) throws ElementNotFoundException {
@@ -32,6 +36,7 @@ public class CartServiceImpl implements CartService {
 	public Cart checkout(Long cartId) {
 		Cart cart = cartRepository.findById(cartId).orElseThrow(() -> new ElementNotFoundException("Cart", cartId));
 		cart.checkout();
+		cartPriceCalculationService.calculatePrice(cart);
 		return cartRepository.save(cart);
 	}
 

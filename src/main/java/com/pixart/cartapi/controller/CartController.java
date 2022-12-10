@@ -1,8 +1,12 @@
 package com.pixart.cartapi.controller;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -76,11 +80,21 @@ public class CartController {
 	@Operation(summary = "Get items of the current cart")
 	@GetMapping(path = "/carts/{cart-id}/items", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<List<CartItemDto>> getCartItems(@PathVariable("cart-id") Long cartId) {
+	public List<EntityModel<CartItemDto>> getCartItems(@PathVariable("cart-id") Long cartId) {
 
 		Cart cart = cartService.getCartById(cartId);
 
-		return new ResponseEntity<>(cartConverter.toDto(cart).getCartItems(), HttpStatus.OK);
+		return cartConverter.toDto(cart).getCartItems();
+	}
+
+	@Operation(summary = "Get item by id")
+	@GetMapping(path = "/items/{item-id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseStatus(HttpStatus.OK)
+	public ResponseEntity<CartItemDto> getCartItem(@PathVariable("item-id") Long itemId) {
+
+		CartItem cartItem = cartItemService.getCartItemById(itemId);
+
+		return new ResponseEntity<>(cartItemConverter.toDto(cartItem), HttpStatus.OK);
 	}
 
 	@Operation(summary = "Edit item by id")
@@ -94,22 +108,26 @@ public class CartController {
 
 	@Operation(summary = "Delete item by id")
 	@DeleteMapping(path = "/items/{item-id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	@ResponseStatus(HttpStatus.OK)
+	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public ResponseEntity<Long> deleteCartItem(@PathVariable("item-id") Long itemId) {
 
 		cartItemService.delete(itemId);
 
-		return new ResponseEntity<>(itemId, HttpStatus.OK);
+		return ResponseEntity.noContent().build();
 	}
 
 	@Operation(summary = "Get cart details(View Cart) by id")
 	@GetMapping(path = "/carts/{cart-id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<CartDto> getCart(@PathVariable("cart-id") Long cartId) {
+	public EntityModel<CartDto> getCart(@PathVariable("cart-id") Long cartId) {
 
 		Cart cart = cartService.getCartById(cartId);
 
-		return new ResponseEntity<>(cartConverter.toDto(cart), HttpStatus.OK);
+		CartDto cartDto = cartConverter.toDto(cart);
+		
+		//TODO add checkout link
+
+		return EntityModel.of(cartDto, linkTo(methodOn(CartController.class).getCart(cartId)).withSelfRel());
 	}
 
 	@Operation(summary = "Checkout cart by id")
