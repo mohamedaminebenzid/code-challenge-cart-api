@@ -57,9 +57,4 @@ public class ProductController {
 		return CollectionModel.of(products, linkTo(methodOn(ProductController.class).getAllProducts()).withSelfRel());
 	}
 
-//	@GetMapping("/")
-//	public List<Product> getAllProducts() {
-//		return productService.getAllProducts();
-//	}
-
 }
