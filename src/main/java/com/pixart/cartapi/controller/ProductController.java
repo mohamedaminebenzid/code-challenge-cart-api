@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pixart.cartapi.assembler.ProductModelAssembler;
 import com.pixart.cartapi.model.Product;
 import com.pixart.cartapi.service.ProductService;
 
@@ -27,9 +28,12 @@ public class ProductController {
 
 	private final ProductService productService;
 
-	public ProductController(ProductService productService) {
+	private final ProductModelAssembler productModelAssembler;
+
+	public ProductController(ProductService productService, ProductModelAssembler productModelAssembler) {
 		super();
 		this.productService = productService;
+		this.productModelAssembler = productModelAssembler;
 	}
 
 	@Operation(summary = "Get product by name")
@@ -39,22 +43,18 @@ public class ProductController {
 
 		Product product = productService.getProductByName(name);
 
-		return EntityModel.of(product, linkTo(methodOn(ProductController.class).getProduct(name)).withSelfRel(),
-				linkTo(methodOn(ProductController.class).getAllProducts()).withRel("products"));
+		return productModelAssembler.toModel(product);
 	}
 
 	@Operation(summary = "Get all products")
 	@GetMapping(path = "/", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
 	public CollectionModel<EntityModel<Product>> getAllProducts() {
-
 		List<EntityModel<Product>> products = productService.getAllProducts().stream()
-				.map(product -> EntityModel.of(product,
-						linkTo(methodOn(ProductController.class).getProduct(product.getName())).withSelfRel(),
-						linkTo(methodOn(ProductController.class).getAllProducts()).withRel("products")))
-				.collect(Collectors.toList());
+				.map(productModelAssembler::toModel).collect(Collectors.toList());
 
 		return CollectionModel.of(products, linkTo(methodOn(ProductController.class).getAllProducts()).withSelfRel());
+
 	}
 
 }

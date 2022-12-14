@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pixart.cartapi.assembler.CustomerModelAssembler;
 import com.pixart.cartapi.model.Customer;
 import com.pixart.cartapi.service.CustomerService;
 
@@ -27,9 +28,12 @@ public class CustomerController {
 
 	private final CustomerService customerService;
 
-	public CustomerController(CustomerService customerService) {
+	private final CustomerModelAssembler customerModelAssembler;
+
+	public CustomerController(CustomerService customerService, CustomerModelAssembler customerModelAssembler) {
 		super();
 		this.customerService = customerService;
+		this.customerModelAssembler = customerModelAssembler;
 	}
 
 	@Operation(summary = "Get customer by username")
@@ -39,8 +43,7 @@ public class CustomerController {
 
 		Customer customer = customerService.getCustomerByUsername(username);
 
-		return EntityModel.of(customer, linkTo(methodOn(CustomerController.class).getCustomer(username)).withSelfRel(),
-				linkTo(methodOn(CustomerController.class).getAllCustomers()).withRel("customers"));
+		return customerModelAssembler.toModel(customer);
 	}
 
 	@Operation(summary = "Get all customers")
@@ -48,10 +51,7 @@ public class CustomerController {
 	@ResponseStatus(HttpStatus.OK)
 	public CollectionModel<EntityModel<Customer>> getAllCustomers() {
 		List<EntityModel<Customer>> customers = customerService.getAllCustomers().stream()
-				.map(customer -> EntityModel.of(customer,
-						linkTo(methodOn(CustomerController.class).getCustomer(customer.getUsername())).withSelfRel(),
-						linkTo(methodOn(CustomerController.class).getAllCustomers()).withRel("customers")))
-				.collect(Collectors.toList());
+				.map(customerModelAssembler::toModel).collect(Collectors.toList());
 
 		return CollectionModel.of(customers,
 				linkTo(methodOn(CustomerController.class).getAllCustomers()).withSelfRel());

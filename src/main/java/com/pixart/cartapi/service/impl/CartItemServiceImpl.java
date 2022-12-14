@@ -21,18 +21,4 @@ public class CartItemServiceImpl implements CartItemService {
 		return cartItemRepository.findById(id).orElseThrow(() -> new ElementNotFoundException("Cart Item", id));
 	}
 
-	@Override
-	public CartItem save(CartItem cartItem) {
-
-		return cartItemRepository.save(cartItem);
-	}
-
-	@Override
-	public void delete(Long itemId) {
-		if (!cartItemRepository.existsById(itemId)) {
-			throw new ElementNotFoundException("Cart Item", itemId);
-		}
-		cartItemRepository.deleteById(itemId);
-	}
-
 }

@@ -2,8 +2,10 @@ package com.pixart.cartapi.dto;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.pixart.cartapi.utils.ArtWorkFileType;
+import com.pixart.cartapi.utils.CartStatus;
 
 import lombok.Data;
 
@@ -23,5 +25,11 @@ public class CartItemDto {
 	private Integer quantity;
 
 	private LocalDate deliveryDate;
+	
+	@JsonIgnore
+	private CartStatus cartStatus;
+	
+	@JsonIgnore
+	private Long cartId;
 
 }

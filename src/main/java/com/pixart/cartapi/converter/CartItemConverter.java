@@ -21,6 +21,8 @@ public class CartItemConverter {
 		CartItemDto cartItemDto = modelMapper.map(cartItem, CartItemDto.class);
 		cartItemDto.setPoductSku(cartItem.getProduct().getSku());
 		cartItemDto.setProductName(cartItem.getProduct().getName());
+		cartItemDto.setCartStatus(cartItem.getCart().getStatus());
+		cartItemDto.setCartId(cartItem.getCart().getId());
 		return cartItemDto;
 	}
 

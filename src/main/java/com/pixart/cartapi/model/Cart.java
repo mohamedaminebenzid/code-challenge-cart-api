@@ -47,7 +47,7 @@ public class Cart {
 
 	private LocalDate checkoutDate;
 
-	@OneToMany(mappedBy = "cart", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "cart", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<CartItem> cartItems = new ArrayList<>();
 
 	public static Cart newInstance(Customer customer) {
@@ -56,31 +56,32 @@ public class Cart {
 		return cart;
 	}
 
-	public void addCartItem(CartItem item) {
+	public void addItem(CartItem item) {
 		cartItems.add(item);
 		item.setCart(this);
 	}
 
+	public void removeItem(CartItem item) {
+		cartItems.remove(item);
+	}
+
 	public void updateStatus() {
-		if (status == null) {
+
+		if (cartItems.isEmpty()) {
 			status = CartStatus.CREATED;
 			creationDate = getCurrentDateTime();
-		} else if (status == CartStatus.CREATED) {
+		} else {
 			status = CartStatus.BUILDING;
 			updateDate = getCurrentDateTime();
 		}
 	}
 
 	public void checkout() {
-		status = CartStatus.CHECKOUT;
-		checkoutDate = LocalDate.now();
-		updateDate = getCurrentDateTime();
-		calculatePrice();
-	}
-
-	private void calculatePrice() {
-		price = BigDecimal.ZERO;
-		
+		if (status == CartStatus.BUILDING) {
+			status = CartStatus.CHECKOUT;
+			checkoutDate = LocalDate.now();
+			updateDate = getCurrentDateTime();
+		}
 	}
 
 	private static LocalDateTime getCurrentDateTime() {
