@@ -60,7 +60,7 @@ by calling POST /cart-api/v1/carts/{cart-id}/items
 - It's noteworthy that the implemented REST API correspond to the level 3 of the Richardson Maturity Model
   by supporting Hypermedia as the Engine of Application State (HATEOAS).
  
- "With HATEOAS, a client interacts with a network application whose application servers provide information dynamically through hypermedia. A REST client needs little   to no prior knowledge about how to interact with an application or server beyond a generic understanding of hypermedia"(Wikipedia)
+  "With HATEOAS, a client interacts with a network application whose application servers provide information dynamically through hypermedia. A REST client needs little    to no prior knowledge about how to interact with an application or server beyond a generic understanding of hypermedia"(Wikipedia)
 
 - I have used POST rather than POST for the checkout operation as it is not idempotent
 
