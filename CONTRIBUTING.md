@@ -30,15 +30,15 @@ Please refer to Swagger UI (see above)
 
 To make this test simple please use swagger-ui (see above).
 
--call GET /cart-api/v1/customers/ and pick one customer's username (for example "naretini")
+- call GET /cart-api/v1/customers/ and pick one customer's username (for example "naretini")
 
--create new cart for the picked customer by calling POST /cart-api/v1/customers/{customer-username}/carts 
+- create new cart for the picked customer by calling POST /cart-api/v1/customers/{customer-username}/carts 
 with the path variable customer-username = "naretini" (without a request body)
 
--call GET /cart-api/v1/products/ and pick the name of some products(product name is unique)
+- call GET /cart-api/v1/products/ and pick the name of some products(product name is unique)
 to be added later to the created cart, for example we choose 'Paper Business Cards', 'Digitally Printed T-shirts', 'Pillow Boxes'
 
--add items (as much as you like) to the cart created above(cart-id=1) 
+- add items (as much as you like) to the cart created above(cart-id=1) 
 by calling POST /cart-api/v1/carts/{cart-id}/items
 
 Request body :
@@ -57,15 +57,13 @@ Request body :
  POST /cart-api/v1/carts/{cart-id}/checkout
 
 ## Import remarks
--It's noteworthy that the implemented REST API correspond to the level 3 of the Richardson Maturity Model
-
-by supporting Hypermedia as the Engine of Application State (HATEOAS).
-
-"With HATEOAS, a client interacts with a network application whose application servers provide information dynamically through hypermedia. A REST client needs little to no prior knowledge about how to interact with an application or server beyond a generic understanding of hypermedia"(Wikipedia)
+- It's noteworthy that the implemented REST API correspond to the level 3 of the Richardson Maturity Model
+  by supporting Hypermedia as the Engine of Application State (HATEOAS).
+  "With HATEOAS, a client interacts with a network application whose application servers provide information dynamically through hypermedia. A REST client needs little   to no prior knowledge about how to interact with an application or server beyond a generic understanding of hypermedia"(Wikipedia)
 
 - I have used POST rather than POST for the checkout operation as it is not idempotent
 
-- To create the cart we had to choose between two options: we either lazily create the cart the first time we’re asked to put a product in it or we eagerly create it with a separate call before we can put any products in it.
+- To create the cart we had to choose between two options: we either lazily create the cart the first time we’re asked to put a product in it or we eagerly create it   with a separate call before we can put any products in it.
 
 Pros of option 1 :
  - one less call
@@ -90,7 +88,7 @@ Pros of Option 2:
 
 - I did not get the point behind the cart status BUILDING. 
   So I assume it is an intermediary status between CREATED and CHECKOUT.
-  A cart has the status BUILDING only if it has at least one item.
+  A cart has the status BUILDING only if it has at least one item and the checkout operation has not be called on it.
 
 ## Errors
 
