@@ -56,7 +56,7 @@ by calling POST /cart-api/v1/carts/{cart-id}/items
 - once you finish editing the cart (cart-id=1), you could checkout it by calling :
  POST /cart-api/v1/carts/{cart-id}/checkout
 
-## Import remarks
+## Import notes
 - It's noteworthy that the implemented REST API correspond to the level 3 of the Richardson Maturity Model
   by supporting Hypermedia as the Engine of Application State (HATEOAS).
   "With HATEOAS, a client interacts with a network application whose application servers provide information dynamically through hypermedia. A REST client needs little   to no prior knowledge about how to interact with an application or server beyond a generic understanding of hypermedia"(Wikipedia)
