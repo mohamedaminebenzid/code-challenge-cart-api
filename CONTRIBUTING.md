@@ -41,13 +41,13 @@ to be added later to the created cart, for example we choose 'Paper Business Car
 - add items (as much as you like) to the cart created above(cart-id=1) 
 by calling POST /cart-api/v1/carts/{cart-id}/items
 
-Request body :
-{
-  "productName": "Paper Business Cards",
-  "fileType": "PDF",
-  "quantity": 500,
-  "deliveryDate": "2022-12-20"
-}
+	Request body :
+	{
+	  "productName": "Paper Business Cards",
+	  "fileType": "PDF",
+	  "quantity": 500,
+	  "deliveryDate": "2022-12-20"
+	}
 
 - you can delete a cart item by calling : DELETE /cart-api/v1/items/{item-id}
 
@@ -63,15 +63,15 @@ Request body :
 
 - I have used POST rather than POST for the checkout operation as it is not idempotent
 
-- To create the cart we had to choose between two options: we either lazily create the cart the first time we’re asked to put a product in it or we eagerly create it   with a separate call before we can put any products in it.
+- To create the cart we had to choose between two options: we either lazily create the cart the first time we’re asked to put a product in it or we eagerly create it     with a separate call before we can put any products in it.
 
-Pros of option 1 :
- - one less call
- - do not create a shopping cart for a user that will never put anything in it
- 
-Pros of Option 2:
- - More clear
- - Compliant to specifications
+	Pros of option 1 :
+	 - one less call
+	 - do not create a shopping cart for a user that will never put anything in it
+
+	Pros of Option 2:
+	 - More clear
+	 - Compliant to specifications
  
  The option 2 has been implemented
  
@@ -112,11 +112,11 @@ When a resource (cart, product, customer, cart item) has not been found
 
 ## Feedbacks
 
--I liked the fact that you can use your favourite technical stack and you could focus on the most relevant aspects
+- I liked the fact that you can use your favourite technical stack and you could focus on the most relevant aspects
 
--I did not get the point behind the cart status BUILDING
+- I did not get the point behind the cart status BUILDING
 
--At first glance, the challenge looks easy but I guess there is some pitfalls :)
-I'm looking forward to know your point of view about the identifiable requests for core development that should be addressed
+- At first glance, the challenge looks easy but I guess there is some pitfalls :)
+  I'm looking forward to know your point of view about the identifiable requests for core development that should be addressed
 
 
