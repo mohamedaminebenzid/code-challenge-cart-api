@@ -117,7 +117,7 @@ When a resource (cart, product, customer, cart item) has not been found
 
 - I did not get the point behind the cart status BUILDING
 
-- At first glance, the challenge looks easy but I guess there is some pitfalls :)
+- At first glance, the challenge looks easy but I guess there are some pitfalls :)
   I'm looking forward to know your point of view about the identifiable requests for core development that should be addressed
 
 
