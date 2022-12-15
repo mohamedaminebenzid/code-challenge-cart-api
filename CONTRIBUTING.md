@@ -36,7 +36,7 @@ To make this test simple please use swagger-ui (see above).
 with the path variable customer-username = "naretini" (without a request body)
 
 -call GET /cart-api/v1/products/ and pick the name of some products(product name is unique)
-to be added later to the created cart, for example we choose = 'Paper Business Cards', 'Digitally Printed T-shirts', 'Pillow Boxes'
+to be added later to the created cart, for example we choose 'Paper Business Cards', 'Digitally Printed T-shirts', 'Pillow Boxes'
 
 -add items (as much as you like) to the cart created above(cart-id=1) 
 by calling POST /cart-api/v1/carts/{cart-id}/items
