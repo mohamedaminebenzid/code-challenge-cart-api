@@ -17,10 +17,10 @@
 
 - Once the application has started :
 
-  *we could access to H2 DB console through: http://localhost:8080/h2-console/ 
+  - we could access to H2 DB console through: http://localhost:8080/h2-console/ 
    with the following login/password:cart/cart
 
-  *we could access to Swagger(Open API) Rest API Documentation : http://localhost:8080/swagger-ui/index.html
+  - we could access to Swagger(Open API) Rest API Documentation : http://localhost:8080/swagger-ui/index.html
    through which you can read the full documentation and test all the implemented REST methods as well
 
 ## Rest API documentation
