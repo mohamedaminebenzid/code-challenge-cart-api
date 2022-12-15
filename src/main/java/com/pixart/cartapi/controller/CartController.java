@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -121,7 +120,7 @@ public class CartController {
 	}
 
 	@Operation(summary = "Edit item by id")
-	@PutMapping(path = "/items/{item-id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(path = "/items/{item-id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<String> editCartItem(@PathVariable("item-id") Long itemId,
 			@RequestBody CartItemDto carItemDto) {
@@ -139,7 +138,8 @@ public class CartController {
 		Cart cart = cartItem.getCart();
 		CartStatus status = cart.getStatus();
 		if (status == CartStatus.CHECKOUT) {
-			return createMethodNotAllowedResponse("You can't delete an item within a cart that is in the status " + status);
+			return createMethodNotAllowedResponse(
+					"You can't delete an item within a cart that is in the status " + status);
 		}
 
 		cartService.deleteItem(cartItem);
@@ -161,7 +161,7 @@ public class CartController {
 	}
 
 	@Operation(summary = "Checkout cart by id")
-	@PutMapping(path = "/carts/{cart-id}/checkout", produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(path = "/carts/{cart-id}/checkout", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> checkoutCart(@PathVariable("cart-id") Long cartId) {
 
 		Cart cart = cartService.getCartById(cartId);

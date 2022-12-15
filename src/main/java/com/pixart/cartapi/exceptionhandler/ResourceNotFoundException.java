@@ -1,14 +1,14 @@
 package com.pixart.cartapi.exceptionhandler;
 
-public class ElementNotFoundException extends RuntimeException {
+public class ResourceNotFoundException extends RuntimeException {
 
 	private static final long serialVersionUID = -3246232479524489206L;
 
-	public ElementNotFoundException() {
+	public ResourceNotFoundException() {
 		super();
 	}
 
-	public ElementNotFoundException(String elementType, Object id) {
+	public ResourceNotFoundException(String elementType, Object id) {
 		super("Could not find " + elementType + " : " + id);
 	}
 

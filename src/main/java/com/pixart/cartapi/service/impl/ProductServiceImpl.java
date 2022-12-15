@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.pixart.cartapi.exceptionhandler.ElementNotFoundException;
+import com.pixart.cartapi.exceptionhandler.ResourceNotFoundException;
 import com.pixart.cartapi.model.Product;
 import com.pixart.cartapi.repository.ProductRepository;
 import com.pixart.cartapi.service.ProductService;
@@ -24,8 +24,8 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public Product getProductByName(String name) throws ElementNotFoundException {
-		return productRepository.findByName(name).orElseThrow(() -> new ElementNotFoundException("Product", name));
+	public Product getProductByName(String name) throws ResourceNotFoundException {
+		return productRepository.findByName(name).orElseThrow(() -> new ResourceNotFoundException("Product", name));
 
 	}
 

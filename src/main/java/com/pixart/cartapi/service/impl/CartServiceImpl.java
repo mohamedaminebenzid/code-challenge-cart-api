@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.pixart.cartapi.exceptionhandler.ElementNotFoundException;
+import com.pixart.cartapi.exceptionhandler.ResourceNotFoundException;
 import com.pixart.cartapi.model.Cart;
 import com.pixart.cartapi.model.CartItem;
 import com.pixart.cartapi.repository.CartRepository;
@@ -22,8 +22,8 @@ public class CartServiceImpl implements CartService {
 	private CartPriceCalculationService cartPriceCalculationService;
 
 	@Override
-	public Cart getCartById(Long id) throws ElementNotFoundException {
-		return cartRepository.findById(id).orElseThrow(() -> new ElementNotFoundException("Cart", id));
+	public Cart getCartById(Long id) throws ResourceNotFoundException {
+		return cartRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Cart", id));
 
 	}
 
@@ -48,8 +48,8 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public Cart checkout(Long cartId) throws ElementNotFoundException {
-		Cart cart = cartRepository.findById(cartId).orElseThrow(() -> new ElementNotFoundException("Cart", cartId));
+	public Cart checkout(Long cartId) throws ResourceNotFoundException {
+		Cart cart = cartRepository.findById(cartId).orElseThrow(() -> new ResourceNotFoundException("Cart", cartId));
 		cart.checkout();
 		cartPriceCalculationService.calculatePrice(cart);
 		return cartRepository.save(cart);
