@@ -62,7 +62,7 @@ by calling POST /cart-api/v1/carts/{cart-id}/items
  
   "With HATEOAS, a client interacts with a network application whose application servers provide information dynamically through hypermedia. A REST client needs little    to no prior knowledge about how to interact with an application or server beyond a generic understanding of hypermedia"(Wikipedia)
 
-- I have used POST rather than POST for the checkout operation as it is not idempotent
+- I have used POST rather than PUT for the checkout operation as it is not idempotent
 
 - To create the cart we had to choose between two options: we either lazily create the cart the first time we’re asked to put a product in it or we eagerly create it     with a separate call before we can put any products in it.
 
