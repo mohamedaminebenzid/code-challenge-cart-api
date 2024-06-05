@@ -31,7 +31,6 @@ jobs:
 
       - name: Run Tests
         run: mvn test
-        working-directory: JVM/intellij-coverage-agent/maven
 
       - name: Archive coverage data
         uses: actions/upload-artifact@v2
