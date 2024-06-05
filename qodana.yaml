@@ -29,5 +29,3 @@ projectJDK: 21 #(Applied in CI/CD pipeline)
 
 #Specify Qodana linter for analysis (Applied in CI/CD pipeline)
 linter: jetbrains/qodana-jvm:2024.1-eap
-
-fixesStrategy: apply
