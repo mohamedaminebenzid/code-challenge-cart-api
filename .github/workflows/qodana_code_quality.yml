@@ -22,11 +22,22 @@ jobs:
       - name: 'Set up JDK 11'
         uses: actions/setup-java@v3
         with:
-              java-version: '11'
-              distribution: 'temurin'
+          java-version: '11'
+          distribution: 'temurin'
+          cache: 'maven'
 
       - name: 'Build with Maven'
         run: mvn -B package --file pom.xml
+
+      - name: Run Tests
+        run: mvn test
+        working-directory: JVM/intellij-coverage-agent/maven
+
+      - name: Archive coverage data
+        uses: actions/upload-artifact@v2
+        with:
+          name: maven-coverage-data
+          path: JVM/intellij-coverage-agent/maven/.qodana/code-coverage
 
       - name: 'Qodana Scan'
         uses: JetBrains/qodana-action@v2024.1
@@ -41,7 +52,7 @@ jobs:
       - name: 'Build and Push Docker Image'
         uses: mr-smithers-excellent/docker-build-push@v4
         with:
-                image: ${{ secrets.DOCKER_USERNAME }}/cart-api
-                registry: docker.io
-                username: ${{ secrets.DOCKER_USERNAME }}
-                password: ${{ secrets.DOCKER_PASSWORD }}
+          image: ${{ secrets.DOCKER_USERNAME }}/cart-api
+          registry: docker.io
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
