@@ -7,7 +7,7 @@ import com.pixart.cartapi.model.Product;
 
 public interface ProductService {
 	
-	 List<Product> getAllProducts();
+	 public List<Product> getAllProducts();
 
 	 Product getProductByName(String name) throws ResourceNotFoundException;
 }
