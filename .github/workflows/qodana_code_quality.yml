@@ -1,5 +1,6 @@
 #add code coverage check
 #separate push to the master ci(should deploy prod) and pull request ci(should deploy staging env)
+#add deployment step
 name: Qodana
 on:
   workflow_dispatch:
